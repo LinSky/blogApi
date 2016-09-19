@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var articles = require('./routes/articles');
+var article = require('./routes/article');
 
 var app = express();
 
@@ -35,7 +36,7 @@ app.all('*', function(req, res, next) {
 app.use('/', routes);
 app.get('/articles', articles);
 app.post('/articles', articles);
-
+app.get('/article/:articleId', article);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
