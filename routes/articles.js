@@ -19,9 +19,9 @@ router.get('/articles',function(req,res,next){
 //
 router.post('/articles',function(req,res,next){
     var article = new Article({
-        title: '文章测试',
+        title: req.body.title,
         author: 'Trouble Maker',
-        content: '文章内容文章内容文章内容文章内容',
+        content: req.body.content,
         createTime: new Date(),
         thumb: 'http://imglf2.nosdn.127.net/img/TnhVL3ZGTmh0cDNIcm9nRk9EWlZ2c2VPQ2dzTHRoZG5YK2UwRnRVNXEyVmdtQ1JZWkJSQjFnPT0.jpg?imageView&thumbnail=600x0&quality=96&stripmeta=0&type=jpg'
       });
