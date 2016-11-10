@@ -6,8 +6,8 @@ var router = express.Router();
 //
 router.get('/articles',function(req,res){
     var query = Article.find({});
-    query.skip(3);
-    query.limit(4);
+    query.skip(0);
+    //query.limit(4);
     query.exec(function(err,rs){
         if(err){
             res.send(err);
