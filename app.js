@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,6 +9,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var articles = require('./routes/articles');
 var article = require('./routes/article');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -17,26 +19,39 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
+
+app.use(cors({
+  origin: ['*'],
+  methods: ['GET', 'POST'],
+  alloweHeaders: ['Conten-Type', 'Authorization']
+}));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.disable('x-powered-by');
 
 
-app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1')
-    if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
-    else  next();
-});
+// app.all('*', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+//     if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
+//     else  next();
+// });
 
 app.use('/', routes);
 app.get('/articles', articles);
 app.post('/articles', articles);
+app.post('/login', login);
 app.get('/article/:articleId', article);
+app.get('/test', function(req, res) {
+    res.send({test: 'success!'});
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

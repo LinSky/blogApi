@@ -14,7 +14,8 @@ router.get('/articles',function(req,res){
         }else{
             //计算数据总数
             query.find(function(err,result){
-                res.send(result);
+                res.json({code: 0, result: result});
+                res.end();
             });
 
         }
