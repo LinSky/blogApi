@@ -5,13 +5,17 @@ var router = express.Router();
 
 //
 router.get('/article/:articleId',function(req, res, next){
-    return Article.findById(req.params.articleId, function(err, article){
+    var articleId = req.params.articleId
+
+    Article.findById(articleId, function(err, article){
         if (!err) {
-            return res.send(article);
+            res.json(article)
+            res.end()
+            Article.update({_id: articleId}, {view: article.view + 1}, function(){
+              console.log('update success!');
+            })
         } else {
-            res.statusCode = 500;
-            log.error('Internal error(%d): %s',res.statusCode,err.message);
-            return res.send({ error: 'Server error' });
+
         }
     })
 });

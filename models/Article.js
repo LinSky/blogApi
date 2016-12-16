@@ -8,7 +8,7 @@ var ArticleSchema = new Schema({
     content : {type: String},
     createTime : {type: Date, default: Date.now},
     authorId : {type: String},
-    authorUsername : {type: String},
+    author : {type: String},
     view : {type: Number, default:0},
     like : {type: Number, default:0},
     commentNum : {type: Number, default:0}

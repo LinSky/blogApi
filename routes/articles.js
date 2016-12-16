@@ -37,7 +37,8 @@ router.post('/articles',function(req,res,next){
     var article = new Article({
         title: req.body.title,
         content: req.body.content,
-        thumb: 'http://imglf2.nosdn.127.net/img/TnhVL3ZGTmh0cDNIcm9nRk9EWlZ2c2VPQ2dzTHRoZG5YK2UwRnRVNXEyVmdtQ1JZWkJSQjFnPT0.jpg?imageView&thumbnail=600x0&quality=96&stripmeta=0&type=jpg'
+        author: req.body.author,
+        authorId: req.body.authorId
       });
 
       article.save(function (err) {
