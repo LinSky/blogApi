@@ -7,7 +7,8 @@ var ArticleSchema = new Schema({
     thumb : {type: String},
     content : {type: String},
     createTime : {type: Date, default: Date.now},
-    author : {type: String, default: '叁木'},
+    authorId : {type: String},
+    authorUsername : {type: String},
     view : {type: Number, default:0},
     like : {type: Number, default:0},
     commentNum : {type: Number, default:0}

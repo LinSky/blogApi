@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var articles = require('./routes/articles');
 var article = require('./routes/article');
 var login = require('./routes/login');
+var register = require('./routes/register');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/', routes);
 app.get('/articles', articles);
 app.post('/articles', articles);
 app.post('/login', login);
+app.post('/register', register);
 app.get('/article/:articleId', article);
 app.get('/test', function(req, res) {
     res.send({test: 'success!'});
