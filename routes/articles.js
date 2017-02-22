@@ -12,7 +12,6 @@ router.get('/articles',function(req,res){
         if(err){
             res.send(err);
         }else{
-            //计算数据总数
             query.find(function(err,result){
                 res.json({code: 0, result: result});
                 res.end();
@@ -20,16 +19,6 @@ router.get('/articles',function(req,res){
 
         }
     });
-
-    // return Article.find(function (err, articles) {
-    //        if (!err) {
-    //            return res.send(articles);
-    //        } else {
-    //            res.statusCode = 500;
-    //            log.error('Internal error(%d): %s',res.statusCode,err.message);
-    //            return res.send({ error: 'Server error' });
-    //        }
-    //    });
 });
 
 //

@@ -2,11 +2,10 @@ var mongodb = require('../config/config');
 var mongoose = mongodb.mongoose;
 var Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
+var ImageSchema = new Schema({
     author : {type: String,},
-    phone : {type: String},
-    password : {type: String},
+    url : {type: String},
     createTime : {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('image', ImageSchema);
