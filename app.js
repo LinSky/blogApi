@@ -12,6 +12,7 @@ var article = require('./routes/article');
 var login = require('./routes/login');
 var register = require('./routes/register');
 var imageUpload = require('./routes/uploadImg');
+var images = require('./routes/images');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.disable('x-powered-by');
 
 app.use('/', routes);
 app.get('/articles', articles);
+app.get('/images', images);
 app.post('/articles', articles);
 app.post('/login', login);
 app.post('/register', register);
