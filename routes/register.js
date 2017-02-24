@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require("mongoose");
-var User = require('../models/User.js');
+var User = require('../models/UserSchema.js');
 var until = require('../until/until.js');
 var router = express.Router();
 

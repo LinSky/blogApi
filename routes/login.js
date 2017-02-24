@@ -1,5 +1,5 @@
 var express = require('express');
-var User = require('../models/User.js');
+var User = require('../models/UserSchema');
 var until = require('../until/until.js');
 var router = express.Router();
 

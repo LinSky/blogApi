@@ -1,43 +1,34 @@
-var express = require('express');
-var mongoose = require("mongoose");
-var Article = require('../models/Article.js');
-var router = express.Router();
+var express = require('express')
+var mongoose = require("mongoose")
+var ArticleInfo = require('../models/ArticleInfoSchema')
+var _ = require('underscore')
+var router = express.Router()
 
 //
-router.get('/articles',function(req,res){
-    var query = Article.find({});
-    query.skip(0);
-    //query.limit(4);
-    query.exec(function(err, rs){
-        if(err){
-            res.send(err);
-        }else{
-            query.find(function(err,result){
-                res.json({code: 0, result: result});
-                res.end();
-            });
+router.get('/articles', function(req, res){
+    var query = ArticleInfo.find()
+    query.populate('author')
+    query.exec(function(err, doc){
+      var newFilterArr = _.map(doc, function (item) {
+        var username = item.toObject().author.username
+        return _.extend(_.omit(item.toObject(), 'content', 'author'), {username: username})
+      })
 
-        }
+      res.json({code: 0, msg:'Success!', result: newFilterArr})
+      res.end();
     });
 });
 
 //
 router.post('/articles',function(req,res,next){
-    var article = new Article({
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author,
-        authorId: req.body.authorId
-      });
-
-      article.save(function (err) {
-        if (!err) {
-          return res.send({ status: 'OK', article:article });
-        } else {
-
-        }
-      });
+  var article = new ArticleInfo({
+    title: req.body.title,                                            //文章标题
+    author: req.body.authorId,                                        //作者
+    content: req.body.content                                         //文章内容
   });
 
+  article.save()
+})
 
-module.exports = router;
+
+module.exports = router

@@ -6,5 +6,5 @@ var ArticleContentSchema = new Schema ({
   content: {type: String}      //文章内容
 })
 
-var ArticleContent = mongoose.model('ArticleInfo', ArticleContentSchema)
+var ArticleContent = mongoose.model('ArticleContent', ArticleContentSchema)
 module.exports = ArticleContent
