@@ -1,19 +1,22 @@
 var express = require('express')
 var mongoose = require("mongoose")
 var Image = require('../models/Image.js')
+var _ = require('underscore')
 var router = express.Router()
 
 //
 router.get('/images', function(req, res, next){
   var query = Image.find()
+  query.populate('authorId')
+  query.exec(function(err, doc){
 
-  query.exec (function(err, doc) {
-    if (err) {
+    var newFilterArr = _.map(doc, function (item) {
+      var username = item.toObject().authorId.username
+      return _.extend(_.omit(item.toObject(), 'authorId'), {authorName: username})
+    })
 
-    } else {
-      res.json({code: 0, msg: '成功', result: doc})
-      res.end()
-    }
+    res.json({code: 0, msg:'Success!', result: newFilterArr})
+    res.end()
   })
 })
 

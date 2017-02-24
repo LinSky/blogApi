@@ -15,9 +15,9 @@ router.get('/articles', function(req, res){
       })
 
       res.json({code: 0, msg:'Success!', result: newFilterArr})
-      res.end();
-    });
-});
+      res.end()
+    })
+})
 
 //
 router.post('/articles',function(req,res,next){

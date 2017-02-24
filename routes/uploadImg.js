@@ -6,7 +6,7 @@ var ImageModel = require('../models/Image.js');
 
 //
 router.post('/image-upload', function(req, res){
-  var form = new multiparty.Form({uploadDir: './public/images/'});
+  var form = new multiparty.Form({uploadDir: './public/uploadImages'});
 
   //上传完成后处理
   form.parse(req, function(err, fields, files) {
@@ -15,11 +15,9 @@ router.post('/image-upload', function(req, res){
     } else {
       var inputFile = files.image[0];
       var uploadedPath = inputFile.path;
-
-
       var Image = new ImageModel({
-        author: fields.author[0],
-        url: uploadedPath
+        authorId: fields.authorId[0],
+        url: uploadedPath.substring(7)
       });
 
       Image.save(function (err) {
